@@ -1,0 +1,8 @@
+include README.md
+include README_EN.md
+include README_PYPI.md
+include LICENSE
+include LICENSE_ES
+include NOTICE
+include CHANGELOG.md
+include version.txt

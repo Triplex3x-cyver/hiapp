@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio - Hiapp{% endblock %}
+
+{% block content %}
+
+<div class="card">
+  <h2>Bienvenido a Hiapp</h2>
+  <p>Asistente de voz autogestionado para el hogar.</p>
+  <p class="muted">
+    El servidor está activo. Los add-ons y el sistema de seguridad
+    se irán añadiendo en las próximas versiones.
+  </p>
+</div>
+
+<div class="card">
+  <h3>Estado</h3>
+  <ul id="status-list">
+    <li>Versión: <span id="s-version" class="muted">cargando...</span></li>
+    <li>IP LAN: <span id="s-ip" class="muted">cargando...</span></li>
+    <li>Puerto: <span id="s-port" class="muted">cargando...</span></li>
+    <li>Directorio de juegos: <span id="s-games" class="muted">cargando...</span></li>
+    <li>Modelo de voz: <span id="s-model" class="muted">cargando...</span></li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>Enlaces rápidos</h3>
+  <ul>
+    <li><a href="/game/">🎮 Servidor de juegos (PPSSPP)</a></li>
+    <li><a href="/api/status">📊 API: estado (JSON)</a></li>
+    <li><a href="/api/version">📦 API: versión (JSON)</a></li>
+  </ul>
+</div>
+
+{% endblock %}
+
+{% block body_script %}
+<script>
+  // Cargar el estado desde la API y rellenar la lista
+  fetch("/api/status")
+    .then(r => r.json())
+    .then(data => {
+      document.getElementById("s-version").textContent = data.version || "-";
+      document.getElementById("s-ip").textContent      = data.ip || "-";
+      document.getElementById("s-port").textContent    = data.port || "-";
+      document.getElementById("s-games").textContent   = data.games_dir || "-";
+      document.getElementById("s-model").textContent   = data.model || "(no configurado)";
+    })
+    .catch(err => {
+      console.error("Error al cargar el estado:", err);
+      ["s-version","s-ip","s-port","s-games","s-model"].forEach(id => {
+        document.getElementById(id).textContent = "error";
+      });
+    });
+</script>
+{% endblock %}

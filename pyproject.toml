@@ -1,0 +1,108 @@
+# Backend de compilación
+[build-system]
+requires = ["setuptools >= 80.0.0"]
+build-backend = "setuptools.build_meta"
+
+
+# Metadatos
+[project]
+name = "hiapp"
+dynamic = ["version"]
+description = "Aplicación de inteligencia para seguridad del hogar. Con asistente de voz."
+readme = "README_PYPI.md"
+
+# Créditos
+authors = [
+  {name = "Dixan Pupo Morales", email = "triplex3x.cyver@gmail.com"}
+]
+maintainers = [
+  {name = "Dixan Pupo Morales", email = "triplex3x.cyver@gmail.com"}
+]
+
+# Legal
+license="Apache-2.0"
+license-files = ["LICENSE*"]
+
+# Buscador de PyPI
+keywords = [
+  "PPSSPP", "vosk-termux", "speech recognition", "home automation",
+  #"speech", "recognition", "artificial intelligence", "ai",
+  #"reconocimiento de voz", "inteligencia artificial", "ia"
+]
+
+# 3 - Alpha | 4 - Beta | 5 - Production/Stable
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: End Users/Desktop",
+
+  "Topic :: Home Automation",
+  "Topic :: Games/Entertainment",
+  "Topic :: Multimedia :: Sound/Audio :: Speech",
+
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.14",
+
+  "Operating System :: POSIX :: Linux",
+  "Operating System :: Android",
+]
+
+# Sistema
+requires-python = ">=3.10"
+dependencies = [
+  "flask>=3.0.0",
+  "flask_wtf",
+  "flask_sslify",
+  #"flask_limiter",
+  "flask_sqlalchemy",
+  "flask_login",
+  "pymysql",
+  "requests>=2.31.0",
+  #"watchdog",
+  "sounddevice",
+]
+
+
+# Dependencias opcionales
+[project.optional-dependencies]
+termux = ["vosk-termux>=0.0.2"]
+desktop = ["vosk"]
+
+
+# Configuración de setuptools
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.dynamic.version]
+file = "version.txt"
+# o attr = "my_package.__version__"}
+
+
+#[project.urls]
+#Homepage = "https://github.com/Triplex3x-cyver/hiapp"
+#Documentation = "https://"
+#Repository = "https://github.com/Triplex3x-cyver/hiapp"
+#Issues = "https://github.com/Triplex3x-cyver/hiapp/issues"
+# o "Bug Tracker" = "https://github.com/Triplex3x-cyver/hiapp/issues"
+#Changelog = "https://github.com/Triplex3x-cyver/hiapp/blob/main/docs/CHANGELOG.md"
+#DOWNLOAD = "https://github.com/Triplex3x-cyver/hiapp/releases"
+
+
+# Scripts ejecutables (instalar un comando)
+# Auto abrir terminal
+[project.scripts]
+hiapp        = "hiapp.main:main"
+hiapp-config = "hiapp.config_cli:main"
+#
+# Comentar ántes de publicar:
+hiapp-server = "hiapp.server.app:main"
+hiapp-voice  = "hiapp.voice.controller:main"
+
+# Sin auto abrir terminal, solo es relevante en Windows.
+# solo interfaz gráfica de la aplicación
+#[project.gui-scripts] FUTURO
+
+# Complementos avanzados
+# discovered_plugins = importlib.metadata.entry_points(group="")
+#[project.entry-points.""] ESTUDIAR

@@ -1,44 +1,72 @@
-# Python
+# Git
+.git-credentials
+.gitconfig
+
+# Byte-compiled / optimized
 __pycache__/
 *.py[cod]
 *$py.class
-*.so
-.Python
-env/
+
+# Distribution / packaging
 build/
-develop-eggs/
 dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-share/python-wheels/
 *.egg-info/
-.installed.cfg
 *.egg
+.eggs/
+eggs/
 
 # Entornos virtuales
-venv/
 .venv/
+venv/
+env/
 ENV/
 env.bak/
 venv.bak/
 
-# Configuraciones locales e IDEs
-.idea/
+# Editores
 .vscode/
+.idea/
+*.swp
+*.swo
+*~
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
-*.swp
+
+# Sistema operativo
 .DS_Store
+Thumbs.db
+.bash_history
+.bashrc
+.pypirc
+
+# Backups
+*.bak
+
+# Logs
+*.log
+
+# Configuración local del usuario
+hiapp.conf
+.hiapp/
+
+# Python otros
+.Python
+develop-eggs/
+/downloads/
+/lib/
+/lib64/
+/parts/
+/sdist/
+/var/
+/wheels/
+/share/python-wheels/
+.installed.cfg
 
 # Datos locales del proyecto (juegos de prueba)
 *.iso
 *.cso
+tree.txt
+test.py
+src/hiapp/test.py

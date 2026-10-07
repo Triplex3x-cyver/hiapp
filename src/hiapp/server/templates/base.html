@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="{{ lang or 'es' }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" href="{{ url_for('main.favicon') }}" type="image/svg+xml" />
+    {% block extra_icons %}{% endblock %}
+    {% block stylesheet %}{% endblock %}
+
+    <style>
+      /* Estilos base mínimos. Se pueden sobrescribir desde block stylesheet. */
+      :root {
+        --bg: #1a1a1a;
+        --fg: #eaeaea;
+        --accent: #4caf50;
+        --muted: #888;
+        --card: #242424;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, sans-serif;
+        background: var(--bg);
+        color: var(--fg);
+        line-height: 1.5;
+      }
+      header {
+        background: var(--card);
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid #333;
+      }
+      main, .container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+      }
+      .card {
+        background: var(--card);
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+      }
+      .muted { color: var(--muted); font-size: 0.9rem; }
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      .flash {
+        background: var(--accent);
+        color: #fff;
+        padding: 0.75rem 1rem;
+        margin: 1rem auto;
+        max-width: 800px;
+        border-radius: 6px;
+      }
+    </style>
+
+    {% block head_script %}{% endblock %}
+
+    <title>{% block title %}Hiapp{% endblock %}</title>
+  </head>
+  <body>
+    <header>
+      {% block header %}
+        <h1>🏠 Hiapp</h1>
+      {% endblock %}
+    </header>
+
+    {% for message in get_flashed_messages(with_categories=False, category_filter=()) %}
+    <div class="flash">{{ message }}</div>
+    {% endfor %}
+
+    {% block content %}{% endblock %}
+
+    {% block body_script %}{% endblock %}
+  </body>
+</html>
