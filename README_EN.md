@@ -46,18 +46,19 @@ Currently in **Alpha** phase. Version `0.0.1` includes:
 
 ### Command
 
+Termux
 ```bash
-pip install hiapp
+pip install hiapp[termux]
 ```
 
 ---
 
 ## :rocket: Getting started
 
-### 1. Start the voice assistant
+### 1. Start Hiapp
 
 ```bash
-hiapp-voice
+hiapp
 ```
 
 The first time, the assistant will:
@@ -77,6 +78,7 @@ All data is saved in `~/.hiapp/`:
 
 ### 2. Start only the server (without voice control)
 
+Useful for testing the HTTP server without the voice assistant:
 ```bash
 hiapp-server
 ```
@@ -103,10 +105,9 @@ Example output: `"ip": "192.168.10.1",`
 2. Enable the **network server** and add the URL:
 
    ```
-   http://<your-server-IP>:5000/
+   http://<your-server-IP>:5000/game/
    ```
-
-   With the example above, you would enter `http://192.168.10.1:5000/`.
+   With the example above, you would enter `http://192.168.10.1:5000/game/`.
 3. Browse the available games. PPSSPP will request the fragments it needs.
 
 ---
@@ -130,7 +131,7 @@ hiapp-config get port
 ### Set a value
 
 ```bash
-hiapp-config set games-dir /storage/XXXX-XXXX/PSP
+hiapp-config set games_dir /storage/XXXX-XXXX/PSP
 hiapp-config set port 8080
 ```
 
@@ -145,34 +146,33 @@ hiapp-config reset --all
 
 | Key           | Default value      | Description                  |
 |---------------|--------------------|------------------------------|
-| `models-dir`  | `~/.hiapp/models`  | Voice models directory       |
-| `games-dir`   | `~/PSP`            | PSP ISO directory            |
+| `models_dir`  | `~/.hiapp/models`  | Voice models directory       |
+| `games_dir`   | `~/PSP`            | PSP ISO directory            |
 | `port`        | `5000`             | HTTP server port             |
 | `host`        | `0.0.0.0`          | Network interface            |
-| `lang`        | `es`               | Model language               |
+| `aliases`     | `[]`               | Extra wake words (besides "Catarsis")  |
 
 > [!TIP]
-> **Advanced users**: you can override any value with environment variables
-> (`HIAPP_PORT`, `HIAPP_GAMES_DIR`, etc.).
-> Environment variables take priority over the configuration file.
+> **Advanced users**: configuration is stored in `~/.hiapp/config.json`.
+> You can edit it directly or use `hiapp-config set <key> <value>`.
 
 > [!NOTE]
 > The activation word **`"Catarsis"`** is fixed and cannot be disabled.
-> Additional *aliases* for other languages may be added in the future.
+> You can add **aliases** with:
+>
+> `hiapp-config set aliases "hey hiapp"`
 
 ---
 
 ## :microphone: Voice control
 
-Once `hiapp-voice` is running, say the activation word and then the command:
+Once `hiapp` is running, say the activation word and then the command:
 
-| Command                 | Action                               |
-|-------------------------|--------------------------------------|
-| `"Catarsis"`            | Activates the assistant (wake word)  |
-| `"Activar servidor"`    | Starts the HTTP server               |
-| `"Desactivar servidor"` | Stops the HTTP server                |
-| `"Estado"`              | Reports whether the server is active |
-| `"Ayuda"`               | Lists available commands             |
+| Command              | Action                               |
+|----------------------|--------------------------------------|
+| `"Catarsis"`         | Activates the assistant (wake word)  |
+| `"Catarsis status"`  | Shows Hiapp's current status         |
+| `"Catarsis help"`    | Lists available commands             |
 
 > [!WARNING]
 > Voice control is only available on Termux/Linux.
@@ -186,7 +186,7 @@ Hiapp does not include voice models by default (they take up a lot of space).
 Hiapp **automatically downloads** the voice model the first time you run the assistant.
 
 ```bash
-hiapp-voice
+hiapp
 ```
 
 > [!TIP]
@@ -194,7 +194,7 @@ hiapp-voice
 > or want them downloaded there, use the command:
 >
 > ```bash
-> hiapp-config set models-dir "path/to/model"
+> hiapp-config set models_dir "path/to/model"
 > ```
 >
 > The assistant will use that path to search for or download models.
@@ -208,11 +208,11 @@ hiapp-voice
 1. Verify both devices are on the **same WiFi network**.
 2. Check the IP of the device running Hiapp: `termux-wifi-connectioninfo`.
 3. Make sure the port is not blocked by the firewall.
-4. Test from the client device's browser: `http://<IP>:5000/`.
+4. Test from the client device's browser: `http://<IP>:5000/game/`.
 
 ### The model download is interrupted
 
-Run `hiapp-voice` again. The download will automatically resume from where it left off.
+Run `hiapp` again. The download will automatically resume from where it left off.
 
 ### The microphone does not work
 
@@ -257,6 +257,6 @@ Others will be added...
 
 ---
 
-Last updated: September 19, 2026
+Last updated: October 7, 2026
 
 [Go to top](#hiapp)

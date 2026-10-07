@@ -52,15 +52,18 @@ classifiers = [
 requires-python = ">=3.10"
 dependencies = [
   "flask>=3.0.0",
-  "flask_wtf",
-  "flask_sslify",
-  #"flask_limiter",
-  "flask_sqlalchemy",
-  "flask_login",
-  "pymysql",
   "requests>=2.31.0",
-  #"watchdog",
   "sounddevice",
+  "tqdm",
+  
+  #"flask_wtf",
+  #"flask_sslify",
+  #"flask_limiter",
+  #"flask_sqlalchemy",
+  #"flask_login",
+  #"pymysql",
+  
+  #"watchdog",
 ]
 
 

@@ -16,11 +16,11 @@ hiapp-config get port
 hiapp-config reset port
 hiapp-config get port
 
-hiapp-config get models-dir
-hiapp-config set models-dir /storage/XXXX-XXXX/models
-hiapp-config get models-dir
-hiapp-config reset models-dir
-hiapp-config get models-dir
+hiapp-config get models_dir
+hiapp-config set models_dir /storage/XXXX-XXXX/models
+hiapp-config get models_dir
+hiapp-config reset models_dir
+hiapp-config get models_dir
 hiapp-config list
 """
 
