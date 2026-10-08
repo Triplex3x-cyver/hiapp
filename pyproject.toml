@@ -25,9 +25,9 @@ license-files = ["LICENSE*"]
 
 # Buscador de PyPI
 keywords = [
-  "PPSSPP", "vosk-termux", "speech recognition", "home automation",
-  #"speech", "recognition", "artificial intelligence", "ai",
-  #"reconocimiento de voz", "inteligencia artificial", "ia"
+  "PPSSPP", "vosk-termux",
+  "speech recognition", "home automation", "ai",
+  #"reconocimiento de voz", "ia"
 ]
 
 # 3 - Alpha | 4 - Beta | 5 - Production/Stable
@@ -51,7 +51,7 @@ classifiers = [
 # Sistema
 requires-python = ">=3.10"
 dependencies = [
-  "flask>=3.0.0",
+  "flask>=3.1.3",
   "requests>=2.31.0",
   "sounddevice",
   "tqdm",
@@ -82,13 +82,13 @@ file = "version.txt"
 # o attr = "my_package.__version__"}
 
 
-#[project.urls]
-#Homepage = "https://github.com/Triplex3x-cyver/hiapp"
+[project.urls]
+Homepage = "https://github.com/Triplex3x-cyver/hiapp"
 #Documentation = "https://"
-#Repository = "https://github.com/Triplex3x-cyver/hiapp"
-#Issues = "https://github.com/Triplex3x-cyver/hiapp/issues"
+Repository = "https://github.com/Triplex3x-cyver/hiapp"
+Issues = "https://github.com/Triplex3x-cyver/hiapp/issues"
 # o "Bug Tracker" = "https://github.com/Triplex3x-cyver/hiapp/issues"
-#Changelog = "https://github.com/Triplex3x-cyver/hiapp/blob/main/docs/CHANGELOG.md"
+Changelog = "https://github.com/Triplex3x-cyver/hiapp/blob/main/docs/CHANGELOG.md"
 #DOWNLOAD = "https://github.com/Triplex3x-cyver/hiapp/releases"
 
 

@@ -5,7 +5,6 @@ Rutas del núcleo:
     /                → página principal (panel).
     /favicon.ico     → ícono del sitio.
 """
-from ..config import build_flask_config
 from ...core.config import load_config
 
 from flask import Blueprint, render_template, send_from_directory

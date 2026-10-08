@@ -122,10 +122,12 @@ def setup_voice_model(config: dict) -> dict:
                         break
 
             if not model_name:
-                print(f"❌ No se encontró un modelo para el idioma '{lang_code}'.")
+                print(
+                    f"❌ No se encontró un modelo para el idioma '{lang_code}'.",
+                    "Pudo ser un error al escribir.")
                 # El usuario vió la lista de idiomas, puede ser un error de teclado.
                 retry = input(
-                    "Pudo ser un error al escribir. ¿Elegir el idioma nuevamente? [s/N] [n]: ").strip().lower() or "n"
+                    "¿Elegir el idioma nuevamente? [s/N] [n]: ").strip().lower() or "n"
                 if retry != "s":
                     return None
                 continue
@@ -193,7 +195,7 @@ def setup_voice_model(config: dict) -> dict:
                 err = f"⚠️  Tamaño inesperado: {downloaded} vs {model_size} ✅ "
         #
         if passed:
-                print("✅ Integridad verificada")
+            print("✅ Integridad verificada")
         else:
             print("❌ El archivo está corrupto")
             print(err)

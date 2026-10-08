@@ -4,7 +4,7 @@ import json
 import time
 import queue
 import threading
-import subprocess
+# import subprocess
 from pathlib import Path
 import sounddevice as sd
 
@@ -17,7 +17,7 @@ except ImportError:
         print("⚠️ Instala vosk-termux (Termux) o vosk (otros)")
         sys.exit(1)
 
-from ..core.config import load_config, save_config, get_lan_ip
+from ..core.config import load_config, get_lan_ip
 from ..core.i18n import translate
 from ..core.commands import CommandRegistry
 from ..addons.ppsspp.paths import get_games_directory
@@ -49,7 +49,9 @@ class VoiceAssistant:
             self.config.get("models_dir"),
             self.config.get("lang_model_name")))
         #
-        print(translate("loading_lang_model", lang=self.config.get("lang"), name=self.config.get("lang_model_name")))
+        print("\n", translate(
+            "loading_lang_model", lang=self.config.get("lang"),
+            name=self.config.get("lang_model_name")))
         self.model = vosk.Model(model_path)
 
         self.registry = CommandRegistry()
@@ -133,7 +135,7 @@ class VoiceAssistant:
     # --- Bucle principal -----------
     def start_listening(self):
         lang = self.config.get("lang", "es")
-        games_dir = get_games_directory()  # self.config["games_dir"]
+        # games_dir = get_games_directory()  # self.config["games_dir"]
         # Wake word fija — no se puede desactivar
         WAKE_WORD = self.wake_word
 
@@ -250,8 +252,8 @@ def main():
     # 3. Validar y cargar el modelo
     model_path = Path(config["models_dir"], config["lang_model_name"])
     if not model_path.exists():
-            print(f"❌ No se encontró el modelo en: {model_path}")
-            sys.exit(1)
+        print(f"❌ No se encontró el modelo en: {model_path}")
+        sys.exit(1)
 
     # 4. Exportar la ruta del modelo para Vosk
     os.environ["VOSK_MODEL_PATH"] = str(model_path)

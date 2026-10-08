@@ -18,7 +18,7 @@ import sys
 import time
 import threading
 
-from .core.config import get_lan_ip, load_config, save_config
+from .core.config import load_config, save_config
 from .core.i18n import translate
 
 
@@ -44,17 +44,6 @@ def _start_server_thread(config):
     return thread
 
 
-def _print_server_urls(lan_ip, port, lang):
-    if lan_ip == "127.0.0.1":
-        # Modo solo-local
-        print(translate("server_local_only", lang=lang, port=port))
-        print(translate("server_local_hint", lang=lang))
-    else:
-        print(translate("server_running", lang=lang, ip=lan_ip, port=port))
-        print(translate("game_running", lang=lang, ip=lan_ip, port=port))
-    print()
-
-
 def main():
     # --- 1. Configuración -----------
     config = load_config()
@@ -75,16 +64,12 @@ def main():
         lang = config.get("lang")
 
     # --- 3. Datos de red para el usuario -----------
-    lan_ip = get_lan_ip()
-    port = config.get("port", 5000)
-    _print_server_urls(lan_ip, port, lang)  # No afecta a check_status en voice/controller.py
+    # lan_ip = get_lan_ip()
+    # port = config.get("port", 5000)
+    # _print_server_urls(lan_ip, port, lang)  # No afecta a check_status en voice/controller.py
 
     # --- 4. Levantar servidor Flask (hilo daemon) -----------
     _start_server_thread(config)
-
-    print("\n", translate("server_running", lang=lang, ip=lan_ip, port=port))
-    print(translate("game_running", lang=lang, ip=lan_ip, port=port))
-    print()
 
     # --- 5. Levantar asistente de voz (hilo principal) -----------
     from .voice.controller import VoiceAssistant

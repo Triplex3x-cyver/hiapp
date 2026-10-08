@@ -9,7 +9,7 @@
 
 ## Descripción
 
-**Asistente de voz autogestionado para el hogar, con servidor HTTP para PPSSPP.**
+**Asistente de voz autogestionado para el hogar, con servidor de juegos para PPSSPP.**
 
 Hiapp es la base de un sistema de seguridad doméstica que crecerá con el tiempo.
 Esta primera versión incluye el núcleo del servidor y el control por voz.
@@ -25,7 +25,7 @@ Esta primera versión incluye el núcleo del servidor y el control por voz.
 - ✅ Monta un servidor de contenidos compatible con el protocolo de red de PPSSPP.
 - ✅ Integración fluida en entornos de consola Termux.
 
-### Road map
+### Roadmap
 
 - 🔜 Próximamente: podrás instalar módulos gratuitos y PRO, para un asistente más útil.
   - Al instalar modulos, tienes solo lo que necesitas, nada de contenidos inútiles para ti.
@@ -45,11 +45,12 @@ y evita colisiones con otros asistentes virtuales del hogar.
 > 💡 **Consejo**
 >
 > Puedes añadir un alias (por ejemplo "oye hiapp") con:
-> `hiapp-config set aliases "oye hiapp"`
+> `hiapp-config set aliases "oye hiapp"`.
+>
 > Cuidado con la pronunciación, tu alias puede no funcionar al hablarlo.
 >
 > También puedes cambiar el directorio de ISOs de PSP con:
-> `hiapp-config set games_dir /ruta/a/tus/ISOs`
+> `hiapp-config set games_dir /ruta/a/tus/ISOs`.
 
 ---
 
@@ -93,7 +94,7 @@ Iniciar Hiapp (servidor + voz):
 hiapp
 ```
 
-Comandos de voz disponibles (dependen del idioma del modelo):
+Comandos de voz disponibles al instalar (dependen del idioma del modelo):
 | Modelo español    | Modelo inglés     |
 |-------------------|-------------------|
 | "Catarsis estado" | "Catarsis status" |
@@ -131,19 +132,33 @@ hiapp-config set aliases "oye hiapp"
 ## 🤝 Contribución
 Consulta la [hoja de contribución](https://github.com/Triplex3x-cyver/hiapp/blob/main/docs/CONTRIBUTING.md) para más detalles.
 
-## 📄 Licencia
-Este proyecto se distribuye bajo la licencia *Apache-2.0*.<br/>
-Consulta el archivo _LICENSE_ en fuente, o _licenses/LICENSE_ en rueda, para más detalles.<br/>
+## 📜 Licencia
+Este proyecto se distribuye bajo la licencia *Apache-2.0*.  
+Consulta el archivo _LICENSE_ en fuente, o _licenses/LICENSE_ en rueda, para más detalles.  
 [Ver en GitHub](https://github.com/Triplex3x-cyver/hiapp/blob/main/LICENSE).
 
 ---
 
 ## 🙏 Agradecimientos
-A la comunidad de **Termux**, por expandir las capacidades de hardware de nuestros teléfonos  
-y permitirnos levantar ecosistemas de asistencia local en la palma de la mano.
+A los creadores de [Termux](https://termux.dev/), por hacer posible el sueño de miles de desarrolladores y entusiastas, como yo, de poder tener incluso una _IA_ en la casa.
+
+
+A los desarrolladores de [Vosk](https://github.com/alphacep/vosk-api) —**Alpha Cephei Inc**— por contribuir al reconocimiento de voz sin conexión.
+
+
+Al equipo de [PPSSPP](https://www.ppsspp.org/), por un emulador extraordinario que tanto he disfrutado, y su soporte de servidores de red.
+
+
+A mi esposa Lili, por mucho.
+
+
+Y a [DeepSeek](https://chat.deepseek.com/), que se integrará como soporte en línea para mis usuarios **PRO**.
+
+
+Otros más serán añadidos...
 
 ---
 
-Última actualización: 7 de Octubre de 2026
+Última actualización: 8 de Octubre de 2026
 
 [Ir al inicio](#hiapp)

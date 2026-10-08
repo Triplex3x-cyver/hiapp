@@ -7,7 +7,9 @@
 
 # Hiapp
 
-> **H.I.A.P.P.** = **H**ome with **I**ntelligent **A**rtificial **P**rivate **P**ersonal Assistant.
+> **H.I.A.P.P.** = **H**ogar con **I**nteligencia **A**rtificial **P**rivada **P**ersonal.
+>
+> **Or:** = Home with Intelligent Artificial Private Personal [assistant].
 
 **Self-hosted voice assistant for the home, with a game server for PPSSPP.**
 
@@ -103,7 +105,6 @@ Example output: `"ip": "192.168.10.1",`
 
 1. Go to **Settings → Tools → Network / Ad-hoc**.
 2. Enable the **network server** and add the URL:
-
    ```
    http://<your-server-IP>:5000/game/
    ```
@@ -114,7 +115,8 @@ Example output: `"ip": "192.168.10.1",`
 
 ## :gear: Configuration
 
-Hiapp uses a configuration file at `~/.hiapp/config.json`. You can edit it with the `hiapp-config` command.
+Hiapp uses a configuration file at `~/.hiapp/config.json`.  
+You can edit it with the `hiapp-config set <key> <value>` command.
 
 ### View current configuration
 
@@ -151,10 +153,6 @@ hiapp-config reset --all
 | `port`        | `5000`             | HTTP server port             |
 | `host`        | `0.0.0.0`          | Network interface            |
 | `aliases`     | `[]`               | Extra wake words (besides "Catarsis")  |
-
-> [!TIP]
-> **Advanced users**: configuration is stored in `~/.hiapp/config.json`.
-> You can edit it directly or use `hiapp-config set <key> <value>`.
 
 > [!NOTE]
 > The activation word **`"Catarsis"`** is fixed and cannot be disabled.
@@ -257,6 +255,6 @@ Others will be added...
 
 ---
 
-Last updated: October 7, 2026
+Last updated: October 8, 2026
 
 [Go to top](#hiapp)

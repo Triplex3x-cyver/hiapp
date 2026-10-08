@@ -101,7 +101,6 @@ Ejemplo de salida: `"ip": "192.168.10.1",`
 
 1. Ve a **Ajustes → Herramientas → Red / Ad-hoc**.
 2. Activa el **servidor de red** y añade la URL:
-
    ```
    http://<IP-de-tu-servidor>:5000/game/
    ```
@@ -112,7 +111,8 @@ Ejemplo de salida: `"ip": "192.168.10.1",`
 
 ## :gear: Configuración
 
-Hiapp usa un archivo de configuración en `~/.hiapp/config.json`. Puedes editarlo con el comando `hiapp-config`.
+Hiapp usa un archivo de configuración en `~/.hiapp/config.json`.  
+Puedes editarlo con el comando `hiapp-config set <clave> <valor>`.
 
 ### Ver la configuración actual
 
@@ -149,10 +149,6 @@ hiapp-config reset --all
 | `port`        | `5000`             | Puerto del servidor HTTP        |
 | `host`        | `0.0.0.0`          | Interfaz de red                 |
 | `aliases`     | `[]`               | Aliases adicionales para activar Hiapp |
-
-> [!TIP]
-> **Usuarios avanzados**: la configuración se guarda en `~/.hiapp/config.json`.
-> Puedes editarla directamente o con `hiapp-config set <clave> <valor>`.
 
 > [!NOTE]
 > La palabra de activación **`"Catarsis"`** es fija y no se puede desactivar.
@@ -256,6 +252,6 @@ Otros más serán añadidos...
 
 ---
 
-Última actualización: 7 de Octubre de 2026
+Última actualización: 8 de Octubre de 2026
 
 [Ir al inicio](#hiapp)

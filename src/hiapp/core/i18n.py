@@ -32,7 +32,8 @@ MESSAGES = {
         "voice_activated":        "🔓 Asistente activado. Di tu comando ({seconds}s).",
         "voice_analyzing":        "✨ Analizando comando...",
         "voice_ask":              "❓ Dime un comando. Di 'Catarsis ayuda' para ver las opciones.",
-        "voice_unknown":          "❓ Comando no reconocido. Di 'Catarsis ayuda' para ver las opciones.",
+        "voice_unknown":          "❓ Comando no reconocido."
+        + " Di 'Catarsis ayuda' para ver las opciones.",
         "voice_help_title":       "📋 --- Comandos Disponibles ---",
         "voice_help_prefix":      "Prefijo: Catarsis, o un alias",
         "voice_help_status":      "  -> 'Catarsis estado'",
@@ -49,12 +50,12 @@ MESSAGES = {
         "config_title":           "🔧 Configuración actual de Hiapp",
         "config_unknown_key":     "❌ Clave desconocida: {text}",
         "config_valid_keys":      "   Claves válidas: {valid}",
-        "config_applang_warn":    "⚠️  '{text}' es una clave gestionada por la app."+"\n"
-            + "    Reconfigura el modelo de voz para cambiarla, ejecuta:"+"\n"
-            + "      hiapp-config reset lang-model-name"+"\n"
-            + "    Luego reinicia Hiapp.",
-        "config_appstat_warn":    "⚠️  '{text}' es una clave de estado de la app."+"\n"
-            + "   Si la reseteas, Hiapp volverá a pedir la descarga del modelo.",
+        "config_applang_warn":    "⚠️  '{text}' es una clave gestionada por la app." + "\n"
+        + "    Reconfigura el modelo de voz para cambiarla, ejecuta:" + "\n"
+        + "      hiapp-config reset lang-model-name" + "\n"
+        + "    Luego reinicia Hiapp.",
+        "config_appstat_warn":    "⚠️  '{text}' es una clave de estado de la app." + "\n"
+        + "   Si la reseteas, Hiapp volverá a pedir la descarga del modelo.",
         "config_nan_err":         "❌ '{value}' no es un número válido para '{text}'",
         "config_reset_ok":        "✅ Configuración de usuario restablecida.",
         "config_nokey_err":       "❌ Especifica una clave o usa --all",
@@ -115,11 +116,11 @@ MESSAGES = {
         "config_unknown_key":     "❌ Unknown key: {text}",
         "config_valid_keys":      "   Valid keys: {valid}",
         "config_applang_warn":    "⚠️  '{text}' is an app-managed key.\n"
-            + "    To change it, reconfigure the voice model:\n"
-            + "      hiapp-config reset lang-model-name\n"
-            + "    Then restart Hiapp.",
+        + "    To change it, reconfigure the voice model:\n"
+        + "      hiapp-config reset lang-model-name\n"
+        + "    Then restart Hiapp.",
         "config_appstat_warn":    "⚠️  '{text}' is an app-state key.\n"
-            + "   Resetting it will make Hiapp ask to download the model again.",
+        + "   Resetting it will make Hiapp ask to download the model again.",
         "config_nan_err":         "❌ '{value}' is not a valid number for '{text}'",
         "config_reset_ok":        "✅ User configuration reset.",
         "config_nokey_err":       "❌ Specify a key or use --all",
@@ -136,7 +137,6 @@ MESSAGES = {
 
         # Others
         "canceled":               "❌ Canceled",
-        
     },
 }
 
@@ -152,7 +152,8 @@ def translate(key: str, lang: str = "es", **kwargs) -> str:
     translations = MESSAGES.get(lang, MESSAGES["es"])
 
     if key not in translations:
-        return f"[{key}] Sin traducción disponible. No translation available."  # marcador visible: traducción faltante
+        return f"[{key}] Sin traducción disponible. No translation available."
+        # (marcador visible: traducción faltante)
 
     text = translations[key]
     try:

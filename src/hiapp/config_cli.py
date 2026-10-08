@@ -44,7 +44,9 @@ config = load_config()
 
 
 def _resolve_key(key: str) -> str:
-    """Convierte 'models-dir' → 'models_dir'. Deja pasar claves ya válidas."""
+    """Convierte 'models-dir' → 'models_dir'. Deja pasar claves ya válidas.
+    Si entra models_dir, pasa sin cambiar.
+    """
     return CLI_TO_INTERNAL.get(key, key)
 
 
@@ -67,14 +69,14 @@ def cmd_get(args):
     if key not in ALL_DEFAULTS:
         print(translate("config_unknown_key", config.get("lang"), text=key))
         print(translate(
-            "config_valid_keys", config.get("lang"), valid=", ".join(CLI_TO_INTERNAL.keys())))
+            "config_valid_keys", config.get("lang"), valid=", ".join(ALL_DEFAULTS.keys())))
         sys.exit(1)
 
     print(config.get(key))
 
 
 def cmd_set(args):
-    global config
+    # global config
     key = _resolve_key(args.key)
 
     if key not in USER_DEFAULTS:
@@ -83,7 +85,7 @@ def cmd_set(args):
         else:
             print(translate("config_unknown_key", config.get("lang"), text=key))
             print(translate(
-                "config_valid_keys", config.get("lang"), valid=", ".join(CLI_TO_INTERNAL.keys())))
+                "config_valid_keys", config.get("lang"), valid=", ".join(ALL_DEFAULTS.keys())))
         sys.exit(1)
 
     # Unir todos los argumentos en un solo string
@@ -110,7 +112,7 @@ def cmd_set(args):
 
 
 def cmd_reset(args):
-    global config
+    # global config
 
     # Caso especial: reset --all
     if args.all:
@@ -125,7 +127,8 @@ def cmd_reset(args):
     if not args.key:
         print(translate("config_nokey_err", config.get("lang")))
         print(translate(
-                "config_valid_keys", config.get("lang"), valid=", ".join(CLI_TO_INTERNAL.keys())+", --all"))
+            "config_valid_keys", config.get("lang"),
+            valid=", ".join(ALL_DEFAULTS.keys()) + ", --all"))
         sys.exit(1)
 
     key = _resolve_key(args.key)
@@ -151,7 +154,8 @@ def cmd_reset(args):
     if key not in ALL_DEFAULTS:
         print(translate("config_unknown_key", config.get("lang"), text=key))
         print(translate(
-            "config_valid_keys", config.get("lang"), valid=", ".join(CLI_TO_INTERNAL.keys())+", --all"))
+            "config_valid_keys", config.get("lang"),
+            valid=", ".join(ALL_DEFAULTS.keys()) + ", --all"))
         sys.exit(1)
 
     # Ejecutar reset en clave de usuario
@@ -170,20 +174,22 @@ def main():
 
     subparsers.add_parser("list", help=translate("cmd_list_help", config.get("lang")))
 
+    # GET
     p_get = subparsers.add_parser("get", help=translate("cmd_get_help", config.get("lang")))
     p_get.add_argument("key")
 
-
+    # SET
     p_set = subparsers.add_parser("set", help=translate("cmd_set_help", config.get("lang")))
     p_set.add_argument("key")
     # p_set.add_argument("value", help="Valor (para listas, separar por comas a,b,c)")
     p_set.add_argument(
         "value", nargs="+", help=translate("cmd_setvalue_help", config.get("lang")))
 
+    # RESET
     p_reset = subparsers.add_parser("reset", help=translate("cmd_reset_help", config.get("lang")))
     p_reset.add_argument("key", nargs="?", help=translate("cmd_resetkey_help", config.get("lang")))
-    p_reset.add_argument("--all", action="store_true",
-                     help=translate("cmd_resetall_help", config.get("lang")))
+    p_reset.add_argument(
+        "--all", action="store_true", help=translate("cmd_resetall_help", config.get("lang")))
 
     args = parser.parse_args()
 

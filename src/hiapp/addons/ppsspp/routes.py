@@ -6,7 +6,6 @@ Se registran bajo el prefijo /game:
     /game/<filename>  → streaming del archivo (soporta rangos)
 """
 
-import os
 from pathlib import Path
 
 from flask import Blueprint, Response, abort, send_file

@@ -10,8 +10,10 @@ import logging
 from flask import Flask, cli
 
 from ..core.i18n import translate
-from .config import build_flask_config
 from .routes import register_blueprints
+from .config import build_flask_config, _print_server_urls
+
+from ..core.config import get_lan_ip, load_config
 
 
 def _silence_flask_banner():
@@ -62,6 +64,13 @@ def create_app() -> Flask:
     # for addon in discover_addons():
     #     addon.register(app)
 
+    config = load_config()
+    lan_ip = get_lan_ip()
+    port = config.get("port", 5000)
+    lang = config.get("lang", "es")
+    _print_server_urls(lan_ip, port, lang)
+    print("   Presiona Ctrl+C para detener.")
+
     return app
 
 
@@ -72,9 +81,6 @@ def main():
     Útil para desarrollo: arranca solo el servidor, sin voz.
     El comando principal `hiapp` usa create_app() dentro de main.py.
     """
-    from ..core.i18n import translate
-    from ..core.config import get_lan_ip, load_config
-
     config = load_config()
     app = create_app()
 
@@ -83,19 +89,20 @@ def main():
 
     host = config.get("host", "0.0.0.0")
     port = config.get("port", 5000)
-    lan_ip = get_lan_ip()
+    # lan_ip = get_lan_ip()
 
-    lang = config.get("lang")
+    # lang = config.get("lang") para translate
 
-    print("Servidor HTTP levantado de forma independiente.")
+    # print("Servidor HTTP levantado de forma independiente.")
     # print(translate("key", lang, lan_ip, port))
-    print(f"🌐 Hiapp escuchando en http://{lan_ip}:{port}/")
-    print(f"🎮 Servidor de juegos en http://{lan_ip}:{port}/game/")
-    print("   Presiona Ctrl+C para detener.")
-    print()
+    # print(f"🌐 Hiapp escuchando en http://{lan_ip}:{port}/")
+    # print(f"🎮 Servidor de juegos en http://{lan_ip}:{port}/game/")
+    # print("   Presiona Ctrl+C para detener.")
+    # print()
 
     app.run(host=host, port=port, debug=False, use_reloader=False, threaded=True)
 
 
+# __name__ es "hiapp.server.app"
 if __name__ == "__main__":
     main()

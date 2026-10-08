@@ -1,13 +1,11 @@
-import os
 import json
-import time
 from pathlib import Path
 
 import requests
 from tqdm import tqdm
 
 
-def download_file(url: str, dest_path: Path, add_meta: dict={}, get_meta_only: bool=False):
+def download_file(url: str, dest_path: Path, add_meta: dict = {}, get_meta_only: bool = False):
     """
     Descarga un archivo con soporte de reanudación.
 
@@ -49,7 +47,7 @@ def download_file(url: str, dest_path: Path, add_meta: dict={}, get_meta_only: b
             meta_data = json.load(f)
 
     if get_meta_only:
-            return meta_data
+        return meta_data
 
     if not meta_data_file.exists():
         # Verificar si el servidor soporta Range
