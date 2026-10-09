@@ -220,6 +220,16 @@ Run `hiapp` again. The download will automatically resume from where it left off
 
 ---
 
+## :speech_balloon: Community
+
+- 🌐 **Website**: http://hiapp.mywebcommunity.org/
+- **Telegram (announcements)**: https://t.me/hiapp_project
+- **Telegram (chat & support)**: https://t.me/hiapp_chat
+- **WhatsApp (channel)**: https://whatsapp.com/channel/0029VbEIkYy1Hsq3oyhkth2Y
+- **GitHub Discussions**: https://github.com/Triplex3x-cyver/hiapp/discussions
+
+---
+
 ## :handshake: Contributing
 
 See the [contributing guide](docs/CONTRIBUTING.md) for more details.

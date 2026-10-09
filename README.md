@@ -217,6 +217,16 @@ Vuelve a ejecutar `hiapp`. La descarga se reanudará automáticamente desde dond
 
 ---
 
+## :speech_balloon: Comunidad
+
+- 🌐 **Sitio web**: http://hiapp.mywebcommunity.org/
+- **Telegram (anuncios)**: https://t.me/hiapp_project
+- **Telegram (chat y soporte)**: https://t.me/hiapp_chat
+- **WhatsApp (canal)**: https://whatsapp.com/channel/0029VbEIkYy1Hsq3oyhkth2Y
+- **GitHub Discussions**: https://github.com/Triplex3x-cyver/hiapp/discussions
+
+---
+
 ## :handshake: Contribución
 
 Consulta la [hoja de contribución](docs/CONTRIBUTING.md) para más detalles.

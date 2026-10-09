@@ -129,6 +129,16 @@ hiapp-config set aliases "oye hiapp"
 
 ---
 
+## 💬 Comunidad
+
+- 🌐 **Sitio web**: http://hiapp.mywebcommunity.org/
+- **Telegram (anuncios)**: https://t.me/hiapp_project
+- **Telegram (chat y soporte)**: https://t.me/hiapp_chat
+- **WhatsApp (canal)**: https://whatsapp.com/channel/0029VbEIkYy1Hsq3oyhkth2Y
+- **GitHub Discussions**: https://github.com/Triplex3x-cyver/hiapp/discussions
+
+---
+
 ## 🤝 Contribución
 Consulta la [hoja de contribución](https://github.com/Triplex3x-cyver/hiapp/blob/main/docs/CONTRIBUTING.md) para más detalles.
 

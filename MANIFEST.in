@@ -4,5 +4,5 @@ include README_PYPI.md
 include LICENSE
 include LICENSE_ES
 include NOTICE
-include CHANGELOG.md
+include docs/CHANGELOG.md
 include version.txt
