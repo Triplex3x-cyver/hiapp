@@ -66,12 +66,9 @@ def create_app() -> Flask:
     # Registrar blueprints del núcleo (main, api)
     register_blueprints(app)
 
-    # --- Add-ons (bundled) ---
-    # En 0.0.1, PPSSPP viene incluido con Hiapp.
-    from ..addons.ppsspp.addon import PpssppAddon
-    PpssppAddon().register(app)
+    # --- Add-ons ---
 
-    # En 0.0.2 pasaremos a descubrimiento dinámico desde ~/.hiapp/addons/.
+    # En 0.1.0 pasaremos a descubrimiento dinámico desde ~/.hiapp/addons/.
     # from ..core.registry import discover_addons
     # for addon in discover_addons():
     #     addon.register(app)
