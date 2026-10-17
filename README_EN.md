@@ -1,5 +1,9 @@
 [![PyPI version](https://img.shields.io/pypi/v/hiapp.svg)](https://pypi.org/project/hiapp)
-[![PyPI Downloads](https://static.pepy.tech/personalized-badge/hiapp?period=total&units=INTERNATIONAL_SYSTEM&left_color=BLACK&right_color=GREEN&left_text=Downloads)](https://pepy.tech/projects/hiapp)
+
+Downloads  
+[![PyPI Weekly Downloads](https://static.pepy.tech/personalized-badge/hiapp?period=weekly&units=NONE&left_color=BLACK&right_color=GREEN&left_text=Weekly)](https://pepy.tech/projects/hiapp)
+[![PyPI Monthly Downloads](https://static.pepy.tech/personalized-badge/hiapp?period=monthly&units=NONE&left_color=BLACK&right_color=GREEN&left_text=Monthly)](https://pepy.tech/projects/hiapp)
+[![PyPI Total Downloads](https://static.pepy.tech/personalized-badge/hiapp?period=total&units=INTERNATIONAL_SYSTEM&left_color=BLACK&right_color=GREEN&left_text=Total)](https://pepy.tech/projects/hiapp)
 
 **🌐 Languages:** [Español](README.md) | **English**
 
@@ -9,9 +13,9 @@
 
 > **H.I.A.P.P.** = **H**ogar con **I**nteligencia **A**rtificial **P**rivada **P**ersonal.
 >
-> **Or:** = Home with Intelligent Artificial Private Personal [assistant].
+> **English:** = Home with Intelligent Artificial Private Personal [assistant].
 
-**Self-hosted voice assistant for the home, with a game server for PPSSPP.**
+**Self-hosted voice assistant for the home, with an HTTP server extensible via add-ons.**
 
 Hiapp runs locally and is designed to work **without internet**.
 Voice, data, and logic are processed on the device itself.
@@ -21,7 +25,7 @@ Voice, data, and logic are processed on the device itself.
 ## :sparkles: Features
 
 - 🎤 **Local Wake Word**: responds to the activation word `"Catarsis"`.
-- 🎮 **Game server**: supports range requests (`Range Requests`) for **PPSSPP** and others.
+- 🧩 **Add-on installation**: select from the list and install the ones you want (games, cameras, etc.).
 - 🔒 **Total privacy**: nothing leaves your local network.
 - ⚙️ **Simple configuration**: a single command to adjust everything (`hiapp-config`).
 
@@ -29,13 +33,20 @@ Voice, data, and logic are processed on the device itself.
 
 ## :construction: Project status
 
-Currently in **Alpha** phase. Version `0.0.1` includes:
+Currently in **Alpha** phase. The core project includes:
 
-- ✅ HTTP server for games, with range support.
+- ✅ Base HTTP server.
 - ✅ Voice control with wake word `"Catarsis"`.
 - ✅ Configuration command `hiapp-config`.
+- ✅ Independent add-on ecosystem (see section below).
 - 🚧 In development: support for IP cameras, alarms, Telegram bot for game groups, and more.
 - 🚧 Initial target is Termux; Windows will be included later.
+
+### Roadmap
+
+- 🔜 Coming soon: PRO modules for a more complete assistant.
+- 🔜 Coming soon: your purchased modules are kept in a local directory (you won't lose them on update).
+- 🔜 Coming soon: AI online support integration for PRO users.
 
 ---
 
@@ -48,7 +59,6 @@ Currently in **Alpha** phase. Version `0.0.1` includes:
 
 ### Command
 
-Termux
 ```bash
 pip install hiapp[termux]
 ```
@@ -69,9 +79,7 @@ The first time, the assistant will:
 2. Start downloading the corresponding voice model.
 3. Show the download progress.
 
-It allows **resuming** if interrupted:
-if you run the command again, it will continue from where it left off,
-so you don't lose progress or waste your mobile data.
+It allows **resuming** if interrupted: if you run the command again, it will continue from where it left off, so you don't lose progress or waste your mobile data.
 
 All data is saved in `~/.hiapp/`:
 
@@ -87,29 +95,23 @@ hiapp-server
 
 By default, the server listens on `0.0.0.0:5000`, meaning all available IPs on the device.
 
-To stop it, press `Ctrl+C`.
-
-### 3. Configure PPSSPP (if you want to play)
-
-#### On the server
-
-Find your local IP (in Termux):
-
+Find your local IP (though Hiapp shows it on startup):
 ```bash
 termux-wifi-connectioninfo | grep ip
 ```
 
 Example output: `"ip": "192.168.10.1",`
 
-#### In PPSSPP
+To stop it, press `Ctrl+C`.
 
-1. Go to **Settings → Tools → Network / Ad-hoc**.
-2. Enable the **network server** and add the URL:
-   ```
-   http://<your-server-IP>:5000/game/
-   ```
-   With the example above, you would enter `http://192.168.10.1:5000/game/`.
-3. Browse the available games. PPSSPP will request the fragments it needs.
+---
+
+## :jigsaw: Add-ons
+
+Hiapp grows through **add-ons**. You can install them at will to add new features (like the PPSSPP streaming server).
+
+Check the full documentation, the list of add-ons, and installation instructions at:
+👉 **https://github.com/Triplex3x-cyver/hiapp-addons**
 
 ---
 
@@ -146,17 +148,17 @@ hiapp-config reset --all
 
 ### Available options
 
-| Key           | Default value      | Description                  |
-|---------------|--------------------|------------------------------|
-| `models_dir`  | `~/.hiapp/models`  | Voice models directory       |
-| `games_dir`   | `~/PSP`            | PSP ISO directory            |
-| `port`        | `5000`             | HTTP server port             |
-| `host`        | `0.0.0.0`          | Network interface            |
-| `aliases`     | `[]`               | Extra wake words (besides "Catarsis")  |
+| Key           | Default value      | Description                     |
+|---------------|--------------------|---------------------------------|
+| `models_dir`  | `~/.hiapp/models`  | Voice models directory          |
+| `games_dir`   | `~/PSP`            | PSP ISO directory               |
+| `port`        | `5000`             | HTTP server port                |
+| `host`        | `0.0.0.0`          | Network interface               |
+| `aliases`     | `[]`               | Extra aliases to activate Hiapp |
 
 > [!NOTE]
 > The activation word **`"Catarsis"`** is fixed and cannot be disabled.
-> You can add **aliases** with:
+> You can add extra **aliases** with:
 >
 > `hiapp-config set aliases "hey hiapp"`
 
@@ -166,11 +168,11 @@ hiapp-config reset --all
 
 Once `hiapp` is running, say the activation word and then the command:
 
-| Command              | Action                               |
-|----------------------|--------------------------------------|
-| `"Catarsis"`         | Activates the assistant (wake word)  |
-| `"Catarsis status"`  | Shows Hiapp's current status         |
-| `"Catarsis help"`    | Lists available commands             |
+| Command              | Action                              |
+|----------------------|-------------------------------------|
+| `"Catarsis"`         | Activates the assistant (wake word) |
+| `"Catarsis status"`  | Shows Hiapp status                  |
+| `"Catarsis help"`    | Lists available commands            |
 
 > [!WARNING]
 > Voice control is only available on Termux/Linux.
@@ -201,12 +203,12 @@ hiapp
 
 ## :hammer_and_wrench: Troubleshooting
 
-### The server is not accessible from PPSSPP
+### The server is not accessible from another device
 
 1. Verify both devices are on the **same WiFi network**.
 2. Check the IP of the device running Hiapp: `termux-wifi-connectioninfo`.
 3. Make sure the port is not blocked by the firewall.
-4. Test from the client device's browser: `http://<IP>:5000/game/`.
+4. Test from the client device's browser: `http://<IP>:5000/`.
 
 ### The model download is interrupted
 
@@ -248,23 +250,18 @@ Unofficial Spanish translation: [LICENSE_ES](LICENSE_ES).
 
 To the creators of [Termux](https://termux.dev/), for making possible the dream of thousands of developers and enthusiasts, like me, of having even an _AI_ at home.
 
-
 To the developers of [Vosk](https://github.com/alphacep/vosk-api) —**Alpha Cephei Inc**— for contributing to offline speech recognition.
-
 
 To the [PPSSPP](https://www.ppsspp.org/) team, for an extraordinary emulator I have enjoyed so much, and its network server support.
 
-
 To my wife Lili, for so much.
 
-
 And to [DeepSeek](https://chat.deepseek.com/), which will be integrated as online support for my **PRO** users.
-
 
 Others will be added...
 
 ---
 
-Last updated: October 8, 2026
+*Last updated: October 17, 2026*
 
-[Go to top](#hiapp)
+[Back to top](#hiapp)

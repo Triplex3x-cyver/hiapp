@@ -17,9 +17,9 @@ MESSAGES = {
         "ready":                  "✅ Modelo listo en {path}",
         "server_local_only":   "⚠️  Servidor en http://127.0.0.1:{port}/ (solo este dispositivo)",
         "server_local_hint":   "   Para acceder desde otro dispositivo, conéctate a una red WiFi.",
-        "game_local_only":     "🎮 Juegos en http://127.0.0.1:{port}/game/ (solo este dispositivo)",
+        "game_local_only":     "🎮 Juegos en 127.0.0.1:{port}/game (solo este dispositivo)",
         "server_running":         "🌐 Servidor en http://{ip}:{port}/",
-        "game_running":           "🎮 Juegos en http://{ip}:{port}/game/",
+        "game_running":           "🎮 Juegos en {ip}:{port}/game",
         "loading_lang_model":     "🧠 Cargando modelo Vosk {name}...",
         "goodbye":                "👋 ¡Hasta pronto!",
         # ... más mensajes
@@ -83,9 +83,9 @@ MESSAGES = {
         "ready":                  "✅ Model ready at {path}",
         "server_local_only":   "⚠️  Server at http://127.0.0.1:{port}/ (this device only)",
         "server_local_hint":   "   To access from another device, connect to a WiFi network.",
-        "game_local_only":     "🎮 Games at http://127.0.0.1:{port}/game/ (this device only)",
+        "game_local_only":     "🎮 Games at 127.0.0.1:{port}/game (this device only)",
         "server_running":         "🌐 Server at http://{ip}:{port}/",
-        "game_running":           "🎮 Games at http://{ip}:{port}/game/",
+        "game_running":           "🎮 Games at {ip}:{port}/game",
         "loading_lang_model":     "🧠 Loading Vosk model {name}...",
         "goodbye":                "👋 Goodbye!",
         # ... more messages

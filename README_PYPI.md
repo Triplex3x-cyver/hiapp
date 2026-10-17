@@ -1,5 +1,5 @@
 [![PyPI version](https://img.shields.io/pypi/v/hiapp.svg)](https://pypi.org/project/hiapp)
-[![PyPI Downloads](https://static.pepy.tech/personalized-badge/hiapp?period=total&units=INTERNATIONAL_SYSTEM&left_color=BLACK&right_color=GREEN&left_text=Downloads)](https://pepy.tech/projects/hiapp)
+[![PyPI Total Downloads](https://static.pepy.tech/personalized-badge/hiapp?period=total&units=INTERNATIONAL_SYSTEM&left_color=BLACK&right_color=GREEN&left_text=Downloads)](https://pepy.tech/projects/hiapp)
 
 **🌐 Idiomas / Languages:** Español | [English](https://github.com/Triplex3x-cyver/hiapp/blob/main/README_EN.md)
 
@@ -7,30 +7,22 @@
 
 # Hiapp
 
-## Descripción
+> **H.I.A.P.P.** = **H**ogar con **I**nteligencia **A**rtificial **P**rivada **P**ersonal.
 
-**Asistente de voz autogestionado para el hogar, con servidor de juegos para PPSSPP.**
+**Asistente de voz autogestionado para el hogar, con servidor HTTP extensible mediante add-ons.**
 
 Hiapp es la base de un sistema de seguridad doméstica que crecerá con el tiempo.
-Esta primera versión incluye el núcleo del servidor y el control por voz.
+Esta versión incluye el núcleo del servidor, el control por voz y el sistema de add-ons.
 
 ### Características
-- **Wake Word local:** Controlado mediante la palabra de activación `"Catarsis"` y un alias para tu idioma.
-- **Streaming directo:** Servidor HTTP/1.1 con soporte nativo de peticiones de rango (`Range Requests`).
-- **Sin configuración compleja:** PPSSPP lee los fragmentos de las ISOs a medida que los necesita, sin selección manual de juegos.
+- **Wake Word local:** Controlado mediante la palabra de activación `"Catarsis"` (y aliases).
 - **Autogestionado:** Funciona sin internet. Los datos y la voz se procesan localmente.
-
-### Problemas que resuelve
-- ✅ Evita duplicar ISOs pesadas de PSP en múltiples dispositivos Android.
-- ✅ Monta un servidor de contenidos compatible con el protocolo de red de PPSSPP.
-- ✅ Integración fluida en entornos de consola Termux.
+- **Modular:** Instala solo los add-ons que necesites (juegos, cámaras, etc.).
 
 ### Roadmap
 
 - 🔜 Próximamente: podrás instalar módulos gratuitos y PRO, para un asistente más útil.
-  - Al instalar modulos, tienes solo lo que necesitas, nada de contenidos inútiles para ti.
-- 🔜 Próximamente: tus módulos se conservan en un directorio tuyo.
-  - No los pierdes al actualizar o desinstalar.
+- 🔜 Próximamente: tus módulos se conservan en un directorio tuyo (no los pierdes al actualizar).
 - 🔜 Próximamente: se añadirán más funciones, y otras plataformas.
 
 ---
@@ -39,15 +31,10 @@ Esta primera versión incluye el núcleo del servidor y el control por voz.
 
 El motor de voz interno responde por defecto a **"Catarsis"**.
 
-Esta elección reduce los falsos positivos en conversaciones diarias  
-y evita colisiones con otros asistentes virtuales del hogar.
-
 > 💡 **Consejo**
 >
 > Puedes añadir un alias (por ejemplo "oye hiapp") con:
 > `hiapp-config set aliases "oye hiapp"`.
->
-> Cuidado con la pronunciación, tu alias puede no funcionar al hablarlo.
 >
 > También puedes cambiar el directorio de ISOs de PSP con:
 > `hiapp-config set games_dir /ruta/a/tus/ISOs`.
@@ -56,7 +43,6 @@ y evita colisiones con otros asistentes virtuales del hogar.
 
 ## 📥 Instalación
 
-Termux
 ```bash
 pip install hiapp[termux]
 ```
@@ -65,24 +51,23 @@ pip install hiapp[termux]
 
 ### 🚀 Configuración rápida
 
-1. Coloca tus ISOs en un directorio, por ejemplo `~/PSP/`.
-2. Conecta el dispositivo a tu red Wi-Fi (o crea un hotspot).
-3. Inicia Hiapp con el comando principal:
+1. Conecta el dispositivo a tu red Wi-Fi (o crea un hotspot).
+2. Inicia Hiapp con el comando principal:
 
    ```bash
    hiapp
    ```
-   Al arrancar verás las URLs exactas con la IP LAN:
-   ```
-   🌐 Servidor en http://192.168.1.5:5000/
-   🎮 Juegos en http://192.168.1.5:5000/game/
-   ```
-4. En PPSSPP, añade el servidor de red con la URL de juegos:
-   ```
-   http://<IP-del-servidor>:5000/game/
-   ```
-   Nota: la ip y el puerto los tomas del mensaje de Hiapp al iniciar.
-5. Detén Hiapp con Ctrl+C (mientras no gestione la seguridad del hogar).
+   Al arrancar verás las URLs exactas con la IP LAN.
+   Detén Hiapp con `Ctrl+C`.
+
+---
+
+## 🧩 Add-ons
+
+Hiapp crece mediante **add-ons**. El servidor de streaming para **PPSSPP** está disponible como un add-on independiente.
+
+Consulta la documentación completa, la lista de add-ons y las instrucciones en:
+👉 **https://github.com/Triplex3x-cyver/hiapp-addons**
 
 ---
 
@@ -94,37 +79,18 @@ Iniciar Hiapp (servidor + voz):
 hiapp
 ```
 
-Comandos de voz disponibles al instalar (dependen del idioma del modelo):
+Comandos de voz (según el idioma del modelo):
 | Modelo español    | Modelo inglés     |
 |-------------------|-------------------|
 | "Catarsis estado" | "Catarsis status" |
 | "Catarsis ayuda"  | "Catarsis help"   |
 
-### Comandos de desarrollo
-
-Útiles para pruebas y depuración:
-
-```bash
-hiapp-server   # Solo el servidor HTTP
-hiapp-voice    # Solo el asistente de voz
-hiapp-config   # Gestionar la configuración
-```
-*hiapp-server:* Útil para probar el servidor HTTP sin el asistente de voz.
-
 ### Configuración
-
-Ver la configuración actual:
 
 ```bash
 hiapp-config list
-```
-
-Cambiar cualquier valor:
-
-```bash
 hiapp-config set port 8080
 hiapp-config set games_dir /storage/XXXX-XXXX/PSP
-hiapp-config set aliases "oye hiapp"
 ```
 
 ---
@@ -132,31 +98,23 @@ hiapp-config set aliases "oye hiapp"
 ## 💬 Comunidad
 
 - 🌐 **Sitio web**: http://hiapp.mywebcommunity.org/
-- **Telegram (anuncios)**: https://t.me/hiapp_project
-- **Telegram (chat y soporte)**: https://t.me/hiapp_chat
-- **WhatsApp (canal)**: https://whatsapp.com/channel/0029VbEIkYy1Hsq3oyhkth2Y
-- **GitHub Discussions**: https://github.com/Triplex3x-cyver/hiapp/discussions
+- **Telegram**: https://t.me/hiapp_chat
+- **WhatsApp**: https://whatsapp.com/channel/0029VbEIkYy1Hsq3oyhkth2Y
 
 ---
 
-## 🤝 Contribución
-Consulta la [hoja de contribución](https://github.com/Triplex3x-cyver/hiapp/blob/main/docs/CONTRIBUTING.md) para más detalles.
-
 ## 📜 Licencia
-Este proyecto se distribuye bajo la licencia *Apache-2.0*.  
-Consulta el archivo _LICENSE_ en fuente, o _licenses/LICENSE_ en rueda, para más detalles.  
-[Ver en GitHub](https://github.com/Triplex3x-cyver/hiapp/blob/main/LICENSE).
+
+Este proyecto se distribuye bajo la licencia *Apache-2.0*. Consulta el archivo `LICENSE` para más detalles.
 
 ---
 
 ## 🙏 Agradecimientos
+
 A los creadores de [Termux](https://termux.dev/), por hacer posible el sueño de miles de desarrolladores y entusiastas, como yo, de poder tener incluso una _IA_ en la casa.
 
 
 A los desarrolladores de [Vosk](https://github.com/alphacep/vosk-api) —**Alpha Cephei Inc**— por contribuir al reconocimiento de voz sin conexión.
-
-
-Al equipo de [PPSSPP](https://www.ppsspp.org/), por un emulador extraordinario que tanto he disfrutado, y su soporte de servidores de red.
 
 
 A mi esposa Lili, por mucho.
@@ -168,7 +126,8 @@ Y a [DeepSeek](https://chat.deepseek.com/), que se integrará como soporte en l�
 Otros más serán añadidos...
 
 ---
+---
 
-Última actualización: 8 de Octubre de 2026
+*Última actualización: 17 de Octubre de 2026*
 
 [Ir al inicio](#hiapp)

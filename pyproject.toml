@@ -21,7 +21,7 @@ maintainers = [
 
 # Legal
 license="Apache-2.0"
-license-files = ["LICENSE*"]
+license-files = ["LICENSE"]
 
 # Buscador de PyPI
 keywords = [
@@ -55,6 +55,7 @@ dependencies = [
   "requests>=2.31.0",
   "sounddevice",
   "tqdm",
+  #"waitress",
   
   #"flask_wtf",
   #"flask_sslify",

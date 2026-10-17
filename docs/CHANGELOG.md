@@ -14,7 +14,33 @@ y este proyecto sigue [Versionado Semántico](https://semver.org/lang/es/).
 - Módulos premium (`hiapp-pro`).
   - [ ] Soporte para cámaras IP.
   - [ ] Integración con alarmas y sensores.
-  - [ ] Bot de Telegram para grupos de juego (cacerías, etc.).
+  - [ ] Bot de Telegram para grupos de juego (cacerías en grupo, etc.).
+
+---
+
+## [0.0.3] - 2026-10-17
+
+### Corregido
+- **PPSSPP (Streaming)**: Solucionados errores de compatibilidad con PPSSPP al solicitar archivos.
+  - El problema base era que se solicitaba la ruta equivocada (sin el prefijo correcto) y con espacios sin codificar, lo que provocaba errores `400 Bad Request` y `308` (doble barra).
+  - Ahora los nombres con espacios se codifican correctamente como `%20` en el catálogo.
+- **PPSSPP (Rutas)**: Protección contra *path traversal* mejorada en el endpoint de streaming.
+
+### Añadido
+- Sección de **Comunidad** en los tres READMEs (Telegram, WhatsApp, GitHub Discussions).
+- URL del sitio web oficial (`http://hiapp.mywebcommunity.org/`) en el `pyproject.toml` y los READMEs.
+- El add-on de PPSSPP ahora es un paquete independiente (ver repo `hiapp-addons`).
+
+## [0.0.2] - 2026-10-08
+
+### Corregido
+- **Empaquetado**: Incluidas las carpetas `templates/` y `static/` en las distribuciones. Antes, Flask lanzaba `TemplateNotFound: index.html` al acceder a la raíz (`/`).
+- **Clasificadores**: Corregido el clasificador de Android (`Operating System :: Android` en lugar de `POSIX :: Android`, que no es válido).
+
+### Añadido
+- Comando `hiapp-config` con soporte para `list`, `get`, `set`, `reset` y `reset --all`.
+- Soporte para alias de la palabra de activación (`hiapp-config set aliases "..."`).
+- Carga del modelo de voz con verificación de integridad (MD5).
 
 ---
 

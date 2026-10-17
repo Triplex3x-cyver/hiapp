@@ -2,9 +2,7 @@
 Add-on gratuito: servidor de juegos para PPSSPP.
 """
 
-# ..
 from ..base import Addon
-# .
 from .routes import bp
 
 

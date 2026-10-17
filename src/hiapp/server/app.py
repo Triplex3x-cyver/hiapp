@@ -5,9 +5,11 @@ Crea la app con la configuración de Flask, registra los blueprints
 del núcleo y los add-ons bundled (disponibles).
 """
 
+import os
 import logging
 
-from flask import Flask, cli
+# from waitress import serve (para futuro)
+from flask import Flask
 
 from ..core.i18n import translate
 from .routes import register_blueprints
@@ -16,19 +18,29 @@ from .config import build_flask_config, _print_server_urls
 from ..core.config import get_lan_ip, load_config
 
 
-def _silence_flask_banner():
+def _configure_logging():
     """
-    Silencia el banner de arranque de Flask y los logs de Werkzeug.
+    Configura el nivel de logging según el entorno.
+
+    Si FLASK_ENV=development, se muestran logs de peticiones HTTP y de Werkzeug.
+    Si no, solo errores (producción).
 
     Por defecto, Flask imprime muchas líneas al arrancar
     ('Serving Flask app', 'Debug mode', 'Running on ...').
     En Hiapp preferimos mostrar solo nuestros propios mensajes.
     """
-    # Banner de arranque
-    cli.show_server_banner = lambda *args, **kwargs: None
+    if os.environ.get("FLASK_ENV") == "development":
+        logging.basicConfig(level=logging.DEBUG)
 
-    # Logs de Werkzeug (peticiones HTTP, warnings del servidor de desarrollo)
-    logging.getLogger("werkzeug").setLevel(logging.ERROR)
+    else:
+        # logging.getLogger("waitress").setLevel(logging.ERROR)
+
+        # Silenciar Flask y Werkzeug
+        logging.getLogger("werkzeug").setLevel(logging.ERROR)
+
+        # Banner de arranque
+        from flask import cli
+        cli.show_server_banner = lambda *args, **kwargs: None
 
 
 def create_app() -> Flask:
@@ -85,7 +97,7 @@ def main():
     app = create_app()
 
     # Silenciar el banner de Flask antes de arrancar
-    _silence_flask_banner()
+    _configure_logging()
 
     host = config.get("host", "0.0.0.0")
     port = config.get("port", 5000)
@@ -94,11 +106,10 @@ def main():
     # lang = config.get("lang") para translate
 
     # print("Servidor HTTP levantado de forma independiente.")
-    # print(translate("key", lang, lan_ip, port))
-    # print(f"🌐 Hiapp escuchando en http://{lan_ip}:{port}/")
-    # print(f"🎮 Servidor de juegos en http://{lan_ip}:{port}/game/")
-    # print("   Presiona Ctrl+C para detener.")
-    # print()
+    # _print_server_urls(lan_ip, port, lang)
+
+    # Servidor de producción (para futuro)
+    # serve(app, host=host, port=port, threads=8)
 
     app.run(host=host, port=port, debug=False, use_reloader=False, threaded=True)
 

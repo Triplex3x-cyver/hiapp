@@ -26,17 +26,20 @@ def _start_server_thread(config):
     """
     Levanta el servidor Flask en un hilo daemon
     y devuelve el hilo.
+    En el futuro se usaría waitress.
     """
-    from .server.app import create_app, _silence_flask_banner
+    # from .server.app import serve (para el futuro)
+    from .server.app import create_app, _configure_logging
 
     # Silenciar el banner antes de crear la app
-    _silence_flask_banner()
+    _configure_logging()
 
     app = create_app()
     host = config.get("host", "0.0.0.0")
     port = config.get("port", 5000)
 
     def run():
+        # serve(app, host=host, port=port, threads=8)
         app.run(host=host, port=port, threaded=True, use_reloader=False)
 
     thread = threading.Thread(target=run, name="hiapp-server", daemon=True)

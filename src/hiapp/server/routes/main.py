@@ -35,6 +35,6 @@ def favicon():
     """Sirve el favicon del sitio."""
     return send_from_directory(
         bp.static_folder,
-        "favicon.svg",
-        mimetype="image/svg+xml",
+        "favicon.svg",  # favicon.ico
+        mimetype="image/svg+xml",  # image/vnd.microsoft.icon
     )
