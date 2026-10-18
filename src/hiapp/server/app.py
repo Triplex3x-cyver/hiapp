@@ -15,7 +15,8 @@ from ..core.i18n import translate
 from .routes import register_blueprints
 from .config import build_flask_config, _print_server_urls
 
-from ..core.config import get_lan_ip, load_config
+from ..core.config import get_lan_ip, load_config, save_config
+from ..core.registry import load_all_addons
 
 
 def _configure_logging():
@@ -77,8 +78,13 @@ def create_app() -> Flask:
     lan_ip = get_lan_ip()
     port = config.get("port", 5000)
     lang = config.get("lang", "es")
+    logger = logging.getLogger("hiapp.addons")
+
     _print_server_urls(lan_ip, port, lang)
     print("   Presiona Ctrl+C para detener.")
+
+    # --- Cargar Add-ons ---
+    load_all_addons(app, config, load_config, save_config, logger)
 
     return app
 

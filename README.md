@@ -54,6 +54,10 @@ Actualmente en fase **Alpha**. El núcleo del proyecto incluye:
 
 - **Termux** (Android) o **Linux**.
 - **Python 3.10 o superior**.
+- (Recomendado en Termux) `iproute2` para detectar la IP local automáticamente:
+  ```bash
+  pkg install iproute2
+  ```
 
 ### Comando
 

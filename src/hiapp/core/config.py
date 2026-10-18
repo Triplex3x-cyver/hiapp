@@ -1,5 +1,7 @@
+import re
 import json
 import socket
+import subprocess
 from pathlib import Path
 
 # Rutas base (fijas)
@@ -58,14 +60,50 @@ def save_config(config: dict):
         json.dump(config, f, indent=2, ensure_ascii=False)
 
 
-def get_lan_ip() -> str:
+def get_lan_ip_udp() -> str:
     """Devuelve la IP local de la interfaz que conecta a la LAN."""
+    # No envía datos reales, solo consulta al SO qué interfaz usaría
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     try:
-        # No envía nada, solo consulta la ruta de salida hacia internet
+        # Conectar a una IP pública ficticia (no se envía nada)
         s.connect(("8.8.8.8", 80))
-        return s.getsockname()[0]
+        ip = s.getsockname()[0]
+        if not ip.startswith("127.") and not ip.startswith("10.0.8."):
+            return ip
     except Exception:
-        return "127.0.0.1"
+        pass
     finally:
         s.close()
+    return False
+
+
+def get_lan_ip() -> str:
+    """
+    Devuelve la IP local del dispositivo (WiFi/Hotspot).
+
+    Estrategia:
+        1. Comando 'ip addr' (si está instalado).
+        2. Truco de socket UDP (sin dependencias).
+        3. Loopback como último recurso.
+    """
+    # 1. Intentar con 'ip addr' (más fiable en Termux)
+    try:
+        output = subprocess.check_output(
+            ["ip", "-4", "addr", "show"], text=True, stderr=subprocess.DEVNULL, timeout=3
+        )
+        ips = re.findall(r"inet\s+(\d+\.\d+\.\d+\.\d+)", output)
+
+        for ip in ips:
+            if ip.startswith("127.") or ip.startswith("10.0.8."):
+                continue
+            return ip
+    except (subprocess.CalledProcessError, FileNotFoundError, subprocess.TimeoutExpired):
+        pass  # 'ip' no está instalado o falló, pasamos al método 2
+
+    # 2. Truco de socket UDP (Python puro)
+    ip = get_lan_ip_udp()
+    if ip:
+        return ip
+
+    # 3. Último recurso
+    return "127.0.0.1"

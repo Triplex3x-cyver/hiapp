@@ -18,6 +18,23 @@ y este proyecto sigue [Versionado Semántico](https://semver.org/lang/es/).
 
 ---
 
+## [0.1.0] - 2026-10-18
+
+### Añadido
+- **Sistema de Add-ons**: Hiapp ahora es modular. El núcleo puede buscar, cargar y gestionar add-ons externos.
+- **Comando `hiapp install <addon>`**: Instalador integrado que descarga desde el catálogo oficial (GitHub), verifica el hash SHA256 e instala en `~/.hiapp/addons/`.
+- **Comando `hiapp list`**: Muestra los add-ons instalados.
+- **Comando `hiapp remove <addon>`**: Elimina un add-on.
+- **`core/registry.py`**: Motor de carga dinámica que inyecta el contexto (`app`, `config`, `logger`) a los add-ons.
+- **Separación del Add-on PPSSPP**: El servidor de juegos ahora se instala por separado desde el repositorio `hiapp-addons`.
+
+### Cambiado
+- El núcleo de Hiapp ya no incluye PPSSPP de serie, reduciendo el peso de la instalación base.
+- **Mejora en la detección de IP (`get_lan_ip`)**: Ahora usa `ip addr` o sockets UDP para funcionar en redes sin internet (Hotspots) y evita falsos positivos de VPN/Cortafuegos.
+- **Requisito del sistema**: Se recomienda instalar `iproute2` (`pkg install iproute2`) en Termux para una detección de IP más fiable.
+
+---
+
 ## [0.0.3] - 2026-10-17
 
 ### Corregido

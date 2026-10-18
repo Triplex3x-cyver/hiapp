@@ -43,6 +43,14 @@ El motor de voz interno responde por defecto a **"Catarsis"**.
 
 ## 📥 Instalación
 
+### Requisitos
+- (Recomendado en Termux) `iproute2` para detectar la IP local automáticamente:
+  ```bash
+  pkg install iproute2
+  ```
+
+### Comando
+
 ```bash
 pip install hiapp[termux]
 ```

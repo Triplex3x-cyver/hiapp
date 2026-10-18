@@ -20,7 +20,6 @@ except ImportError:
 from ..core.config import load_config, get_lan_ip
 from ..core.i18n import translate
 from ..core.commands import CommandRegistry
-from ..addons.ppsspp.paths import get_games_directory
 from .assistant import setup_voice_model
 
 # Segundos que el asistente permanece "despierto" tras la activación
@@ -135,7 +134,8 @@ class VoiceAssistant:
     # --- Bucle principal -----------
     def start_listening(self):
         lang = self.config.get("lang", "es")
-        # games_dir = get_games_directory()  # self.config["games_dir"]
+        # games_dir = self.config.get("games_dir", "~/PSP")
+
         # Wake word fija — no se puede desactivar
         WAKE_WORD = self.wake_word
 
@@ -213,7 +213,7 @@ class VoiceAssistant:
     def check_status(self):
         """Muestra el estado actual de Hiapp y sus add-ons."""
         lang = self.config.get("lang", "es")
-        games_dir = get_games_directory()
+        games_dir = self.config.get("games_dir", "~/PSP")
         model = self.config.get("lang_model_name")
         # host = self.config.get("host", "0.0.0.0")
         host = get_lan_ip()

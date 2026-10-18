@@ -18,8 +18,12 @@ import sys
 import time
 import threading
 
+# from .core.config import get_lan_ip
 from .core.config import load_config, save_config
 from .core.i18n import translate
+
+# Importar las funciones del CLI de addons
+from .addons_cli import list_addons, install_addon, remove_addon
 
 
 def _start_server_thread(config):
@@ -48,11 +52,39 @@ def _start_server_thread(config):
 
 
 def main():
-    # --- 1. Configuración -----------
+    # --- 1. Manejo de comandos CLI (hiapp install, list, remove) -----------
+    if len(sys.argv) > 1:
+        command = sys.argv[1]
+
+        if command == "list":
+            list_addons()
+            sys.exit(0)
+
+        elif command == "install":
+            if len(sys.argv) < 3:
+                print("❌ Falta el nombre del add-on. Uso: hiapp install <nombre>")
+                sys.exit(1)
+            install_addon(sys.argv[2])
+            sys.exit(0)
+
+        elif command == "remove":
+            if len(sys.argv) < 3:
+                print("❌ Falta el nombre del add-on. Uso: hiapp remove <nombre>")
+                sys.exit(1)
+            remove_addon(sys.argv[2])
+            sys.exit(0)
+
+        else:
+            print(f"❌ Comando desconocido: '{command}'")
+            print("   Comandos disponibles: install, list, remove")
+            sys.exit(1)
+    # Si no hay argumentos, arrancar el asistente normal
+
+    # --- 2. Configuración -----------
     config = load_config()
     lang = config.get("lang")
 
-    # --- 2. Asistente de primer inicio -----------
+    # --- 3. Asistente de primer inicio -----------
     if not config.get("lang_model_name"):
         # Importación diferida: solo se carga si hace falta
         from .voice.assistant import setup_voice_model
@@ -66,15 +98,15 @@ def main():
         save_config(config)
         lang = config.get("lang")
 
-    # --- 3. Datos de red para el usuario -----------
+    # --- 4. Datos de red para el usuario -----------
     # lan_ip = get_lan_ip()
     # port = config.get("port", 5000)
     # _print_server_urls(lan_ip, port, lang)  # No afecta a check_status en voice/controller.py
 
-    # --- 4. Levantar servidor Flask (hilo daemon) -----------
+    # --- 5. Levantar servidor Flask (hilo daemon) -----------
     _start_server_thread(config)
 
-    # --- 5. Levantar asistente de voz (hilo principal) -----------
+    # --- 6. Levantar asistente de voz (hilo principal) -----------
     from .voice.controller import VoiceAssistant
 
     assistant = VoiceAssistant()
